@@ -7,23 +7,19 @@ using System.Threading.Tasks;
 
 namespace RAGExample.Executor
 {
-	public class SimpleRAGeExecutor
-	{
-		public SimpleRAGeExecutor() { }
 
+	//this is apparently a much more advanced way to query. It can use vector dbs , e.g. document dbs etc.
+	public class DBRagExecutor
+	{
+		public DBRagExecutor() { }
 		public async Task Execute(string[] documents)
 		{
-			var rag = new SimpleRag();
-
-			// Load your documents
-
-			foreach (var doc in documents)
+			DBRag rag = new DBRag();
+			rag.InitializeAsync().Wait();
+			for(int i = 0; i < documents.Length; i++)
 			{
-				rag.AddDocument(doc);
+				await rag.AddDocumentAsync(i.ToString(), documents[i]);
 			}
-
-			Console.WriteLine("Generating embeddings...");
-			await rag.GenerateEmbeddingsAsync();
 
 			while (true)
 			{
@@ -37,6 +33,12 @@ namespace RAGExample.Executor
 				var answer = await rag.QueryAsync(question);
 				Console.WriteLine($"Answer: {answer}");
 			}
+
 		}
+
+		
+
+		
+
 	}
 }

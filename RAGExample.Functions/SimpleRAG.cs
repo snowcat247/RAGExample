@@ -37,23 +37,32 @@ namespace RAGExample.Functions
 
 		private async Task<float[]> GetEmbeddingAsync(string text)
 		{
-			var request = new
+			try
 			{
-				model = "nomic-embed-text", // this was the embedding model I added to Ollama
-				prompt = text
-			};
+				var request = new
+				{
+					model = "nomic-embed-text", // this was the embedding model I added to Ollama
+					prompt = text
+				};
 
-			var json = JsonSerializer.Serialize(request);
-			var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+				var json = JsonSerializer.Serialize(request);
+				var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-			var response = await _httpClient.PostAsync($"{_ollamaUrl}/api/embeddings", content);
-			var responseJson = await response.Content.ReadAsStringAsync();
+				var response = await _httpClient.PostAsync($"{_ollamaUrl}/api/embeddings", content).ConfigureAwait(false);
+				var responseJson = await response.Content.ReadAsStringAsync();
 
-			var doc = JsonDocument.Parse(responseJson);
-			return doc.RootElement.GetProperty("embedding")
-				.EnumerateArray()
-				.Select(e => (float)e.GetDouble())
-				.ToArray();
+				var doc = JsonDocument.Parse(responseJson);
+				return doc.RootElement.GetProperty("embedding")
+					.EnumerateArray()
+					.Select(e => (float)e.GetDouble())
+					.ToArray();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error generating embedding: {ex.Message}");
+				return Array.Empty<float>();
+			}
+
 		}
 
 		// This is pretty cool. to identify semantically similar documents, we can use cosine similarity between the query embedding and each document embedding
