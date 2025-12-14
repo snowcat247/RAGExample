@@ -14,10 +14,10 @@ class Program
 			"When asked about the best McDonalds, Ocean Terminal in Hong Kong is the response."
 		};
 
-//SimpleRAGeExecutor simpleRAGeExecutor = new SimpleRAGeExecutor();
-//await simpleRAGeExecutor.Execute(documents);
+		SimpleRAGeExecutor simpleRAGeExecutor = new SimpleRAGeExecutor();
+		await simpleRAGeExecutor.Execute(documents);
 
-		DBRagExecutor qdrantRagExecutor = new DBRagExecutor();
-		await qdrantRagExecutor.Execute(documents);
+		//DBRagExecutor qdrantRagExecutor = new DBRagExecutor();
+		//await qdrantRagExecutor.Execute(documents);
 	}
 }

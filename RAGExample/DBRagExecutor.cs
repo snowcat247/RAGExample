@@ -15,24 +15,24 @@ namespace RAGExample.Executor
 		public async Task Execute(string[] documents)
 		{
 			DBRag rag = new DBRag();
-			rag.InitializeAsync().Wait();
-			for(int i = 0; i < documents.Length; i++)
-			{
-				await rag.AddDocumentAsync(i.ToString(), documents[i]);
-			}
+			//rag.InitializeAsync().Wait();
+			//for(int i = 0; i < documents.Length; i++)
+			//{
+			//	await rag.AddDocumentAsync(i.ToString(), documents[i]);
+			//}
 
-			while (true)
-			{
-				Console.Write("\nAsk a question (or 'quit'): ");
-				var question = Console.ReadLine();
+			//while (true)
+			//{
+			//	Console.Write("\nAsk a question (or 'quit'): ");
+			//	var question = Console.ReadLine();
 
-				if (question?.ToLower() == "quit")
-					break;
+			//	if (question?.ToLower() == "quit")
+			//		break;
 
-				Console.WriteLine("Thinking...");
-				var answer = await rag.QueryAsync(question);
-				Console.WriteLine($"Answer: {answer}");
-			}
+			//	Console.WriteLine("Thinking...");
+			//	var answer = await rag.QueryAsync(question);
+			//	Console.WriteLine($"Answer: {answer}");
+			//}
 
 		}
 
