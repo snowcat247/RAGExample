@@ -8,4 +8,5 @@ I have provided context to the model through a series of documents that are load
 
 When the user asks such a pertinent question, it is given an unambiguous response.
 
-<img width="914" height="220" alt="image" src="https://github.com/user-attachments/assets/d9606b31-b90a-4775-b3ed-43c85517d6aa" />
+<img width="1094" height="446" alt="image" src="https://github.com/user-attachments/assets/8f9b512d-bffb-48df-b115-53dd44464a93" />
+
